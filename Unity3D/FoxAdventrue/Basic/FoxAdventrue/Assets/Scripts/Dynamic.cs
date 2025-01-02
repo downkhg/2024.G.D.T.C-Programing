@@ -11,14 +11,24 @@ public class Dynamic : MonoBehaviour
     public bool isLodder;
     public int Score;
 
+    public Gun gun;
+
+    public Vector3 vDir;
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.RightArrow))
+        {
             transform.position += Vector3.right * Speed * Time.deltaTime;
+            vDir = Vector3.right;
+        }
 
         if (Input.GetKey(KeyCode.LeftArrow))
+        {
             transform.position += Vector3.left * Speed * Time.deltaTime;
+            vDir = Vector3.left;
+        }
 
         if (isLodder)
         {
@@ -38,6 +48,11 @@ public class Dynamic : MonoBehaviour
                 rigidbody.AddForce(Vector3.up * JumpPower);
                 isJump = true;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            gun.Shot(vDir);
         }
 
         //이동: 시간에 따라 위치가 변경되는 것.

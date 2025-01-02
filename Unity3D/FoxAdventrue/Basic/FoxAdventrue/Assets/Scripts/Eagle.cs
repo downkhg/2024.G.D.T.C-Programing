@@ -81,7 +81,7 @@ public class Eagle : MonoBehaviour
 
     private void OnDisable()
     {
-        Instantiate(this.gameObject, trResponPoint.position, Quaternion.identity).GetComponent<Eagle>().enabled = true;
+        //Instantiate(this.gameObject, trResponPoint.position, Quaternion.identity).GetComponent<Eagle>().enabled = true;
         //GameObject objEagle = Instantiate(this.gameObject, trResponPoint.position, Quaternion.identity);
         //objEagle.SetActive(true);
         //objEagle.GetComponent<Eagle>().enabled = true;

@@ -24,6 +24,8 @@ public class CameraTracker : MonoBehaviour
         {
             Vector3 vTargetPos = trTargetPoint.position;
             Vector3 vPos = this.transform.position;
+            vTargetPos.z = vPos.z;
+
             Vector3 vDist = vTargetPos - vPos;//위치의 차이를 이용한 거리구하기
             Vector3 vDir = vDist.normalized;//두물체사이의 방향(평준화-거리를뺀 이동량)
             float fDist = vDist.magnitude; //두물체사이의 거리(스칼라-순수이동량)
