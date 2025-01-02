@@ -6,9 +6,6 @@ public class Eagle : MonoBehaviour
 {
     public float Speed = 1;
     public float Site = 1;
-    // Start is called before the first frame update
-    void Start()
-    {
         
     }
 
