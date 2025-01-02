@@ -4,7 +4,22 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public int Score = 10;
+    public ItemManager.E_ITEM_TYPE Itemtype;
+
+    public void SetItemColor()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        switch (Itemtype)
+        {
+            case ItemManager.E_ITEM_TYPE.SUPERMODE:
+                spriteRenderer.color = Color.yellow;
+                break;
+            case ItemManager.E_ITEM_TYPE.LEASER:
+                spriteRenderer.color = Color.cyan;
+                break;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,18 +30,18 @@ public class Item : MonoBehaviour
     void Update()
     {
         
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(gameObject.name + ".OnTriggerEnter2D:"+ collision.name);
+        //Debug.Log(gameObject.name + ".OnTriggerEnter2D:"+ collision.name);
         Dynamic dynamic = collision.gameObject.GetComponent<Dynamic>();
 
         //if (collision.gameObject.name == "player")
         if (collision.gameObject.tag == "Player")
         {
-            dynamic.Score += Score;
-            Destroy(this.gameObject);
+             GameManager.GetInstance().ItemManager.GetItemInfo(Itemtype);
         }
     }
 }

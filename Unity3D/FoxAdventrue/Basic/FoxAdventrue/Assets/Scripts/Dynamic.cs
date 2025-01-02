@@ -19,12 +19,19 @@ public class Dynamic : MonoBehaviour
 
     public bool isSuperMode;
 
-    public IEnumerator ProcessTimmer()
+    public void ActiveSuperMode(float time)
     {
+        StartCoroutine(ProcessTimmer(time));
+    }
+
+    public IEnumerator ProcessTimmer(float item)
+    {
+        Debug.Log("ProcessTimmer 1");
         isSuperMode = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(item);
         isSuperMode = false;
         this.GetComponent<SpriteRenderer>().color = Color.white;
+        Debug.Log("ProcessTimmer 2");
     }
 
     public void ProcessSuperMode()
@@ -43,7 +50,7 @@ public class Dynamic : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(ProcessTimmer());
+        ActiveSuperMode(1);
     }
 
     private void OnDestroy()

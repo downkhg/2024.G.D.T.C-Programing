@@ -89,7 +89,7 @@ public class Eagle : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("OnDestroy:"+gameObject.name);
+        //Debug.Log("OnDestroy:"+gameObject.name);
         
     }
 

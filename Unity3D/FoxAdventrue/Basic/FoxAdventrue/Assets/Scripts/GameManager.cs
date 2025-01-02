@@ -45,8 +45,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance = null;
 
-
     public GUIManager guiManager;
+    public ItemManager ItemManager;
 
     public void Awake()
     {
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
                 eagle.trPatrolPoint = trPatrolPoint;
                 eagle.trResponPoint = responEagle.transform;
                 eagle.SetState(Eagle.E_AI_STATUS.RETURN);
-                Debug.Log("SetPatrol");
+                //Debug.Log("SetPatrol");
             }
         }
 
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
                 frog.trPatrolPoint = trPatrolPoint;
                 frog.trResponPoint = responEagle.transform;
                 frog.SetState(Frog.E_AI_STATUS.RETURN);
-                Debug.Log("SetPatrol");
+                //Debug.Log("SetPatrol");
             }
         }
     }

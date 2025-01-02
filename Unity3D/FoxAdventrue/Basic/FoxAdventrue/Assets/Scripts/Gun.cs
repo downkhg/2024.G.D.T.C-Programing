@@ -18,7 +18,7 @@ public class Gun : MonoBehaviour
     public LineRenderer lineRenderer;
 
 
-    void SetBullet(E_BULLET_TYPE bullet)
+    public void SetBullet(E_BULLET_TYPE bullet)
     {
         switch(bullet)
         {
