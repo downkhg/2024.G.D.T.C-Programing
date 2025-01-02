@@ -102,7 +102,7 @@ MonoBehaviour:
   isJump: 0
   isMove: 0
   Speed: 1
-  Site: 1
+  Site: 0.5
   curAIState: 2
   curTime: 0
   maxTime: 1

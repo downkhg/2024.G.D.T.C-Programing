@@ -75,10 +75,25 @@ public class GameManager : MonoBehaviour
             {
                 eagle.trPatrolPoint = trPatrolPoint;
                 eagle.trResponPoint = responEagle.transform;
-                //eagle.SetState(Eagle.E_AI_STATUS.RETURN);
+                eagle.SetState(Eagle.E_AI_STATUS.RETURN);
                 Debug.Log("SetPatrol");
             }
-        } 
+        }
+
+        Responner responFrog = GetRespnner(E_MONSTER.FROG);
+
+        if (responFrog && responFrog.objTarget)
+        {
+            Frog frog = responFrog.objTarget.GetComponent<Frog>();
+
+            if (frog && frog.trPatrolPoint == null)
+            {
+                frog.trPatrolPoint = trPatrolPoint;
+                frog.trResponPoint = responEagle.transform;
+                frog.SetState(Frog.E_AI_STATUS.RETURN);
+                Debug.Log("SetPatrol");
+            }
+        }
     }
 
     // Start is called before the first frame update
