@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Unity3D",
+    "\\Unity3D\\FoxAdventrue",
+    "\\Unity3D\\FoxAdventrue\\Basic",
+    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue",
+    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets"
   ],
-  "SelectedNode": "\\C:\\Users\\Administrator\\Source\\Repos\\2024.G.D.T.C-Programing",
+  "SelectedNode": "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\WorkList.txt",
   "PreviewInSolutionExplorer": false
 }
