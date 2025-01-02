@@ -10,10 +10,18 @@ public class Dynamic : MonoBehaviour
     public bool isJump; //필요한 조건인 점프인지 확인하는것이 더 정확한 코드가 된다.
     public bool isLodder;
     public int Score;
+    static public int Life = 3; //정적변수를 활용하면 모든객체가 공유된다. 그러므로 새로생성된 객체도 값이 유지된다. 단 멀티플레이게임을 제작할수없다.
+    //public int Life = 3; //객체마다 값이 3으로 설정되어있으므로 객체가 생성시 최대값으로 취급된다.
 
     public Gun gun;
 
     public Vector3 vDir;
+
+    private void OnDestroy()
+    {
+        //GameObject.Find("GameManager").GetComponent<GameManager>().Life--; //작동은하지만 객체에 접근하는데 연산이 필요하다.
+        GameManager.GetInstance().Life--;
+    }
 
     // Update is called once per frame
     void Update()
@@ -62,6 +70,7 @@ public class Dynamic : MonoBehaviour
     private void OnGUI()
     {
         GUI.Box(new Rect(0, 0, 200, 20), "Score:" + Score);
+        GUI.Box(new Rect(0, 20, 200, 20), "Life:" + Life);
         //GUI.Box(new Rect(20, 0, 200, 20), "Ground:" + isGround);
     }
 
@@ -73,7 +82,7 @@ public class Dynamic : MonoBehaviour
             Destroy(collision.gameObject);
             Score++;
         }
-       
+
         isJump = false;
     }
 
@@ -92,6 +101,11 @@ public class Dynamic : MonoBehaviour
             rigidbody.gravityScale = 0;
             rigidbody.velocity = Vector2.zero;
             isLodder = true;
+        }
+
+        if (collision.gameObject.name == "house")
+        {
+            
         }
     }
 

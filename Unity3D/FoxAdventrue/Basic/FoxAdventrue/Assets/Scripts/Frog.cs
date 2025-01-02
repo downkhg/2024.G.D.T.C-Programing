@@ -60,7 +60,7 @@ public class Frog : MonoBehaviour
                 }
                 break;
             case E_AI_STATUS.PATROL:
-                if (trTargetPoint)
+                if (trTargetPoint && trPatrolPoint && trResponPoint)
                 {
                     if (isMove == false)
                     {
