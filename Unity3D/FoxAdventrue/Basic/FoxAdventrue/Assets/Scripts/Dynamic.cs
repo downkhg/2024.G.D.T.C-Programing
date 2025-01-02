@@ -5,20 +5,16 @@ using UnityEngine;
 public class Dynamic : MonoBehaviour
 {
     public float JumpPower;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float Speed = 1;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
-            transform.position += Vector3.right * Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+            transform.position += Vector3.right * Speed;// * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.LeftArrow))
-            transform.position += Vector3.left * Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+            transform.position += Vector3.left * Speed;// * Time.deltaTime;
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
