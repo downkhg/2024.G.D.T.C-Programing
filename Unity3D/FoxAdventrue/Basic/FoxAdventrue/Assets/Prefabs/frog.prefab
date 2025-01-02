@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8706378536108790170}
   - component: {fileID: 8706378536108790169}
   - component: {fileID: 114568856746322048}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: frog
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

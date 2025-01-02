@@ -10,6 +10,7 @@ public class GUIManager : MonoBehaviour
 
     public void Initialize()
     {
+        gameObject.SetActive(true);
         SetGUIState(curScene);   
     }
 
@@ -39,6 +40,7 @@ public class GUIManager : MonoBehaviour
                 break;
             case E_SCENE.GAMEOVER:
                 Time.timeScale = 0;
+                GameManager.GetInstance().EventReset();
                 break;
         }
         ShowGUIState(scene);

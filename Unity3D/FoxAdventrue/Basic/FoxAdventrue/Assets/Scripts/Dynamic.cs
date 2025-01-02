@@ -17,9 +17,39 @@ public class Dynamic : MonoBehaviour
 
     public Vector3 vDir;
 
+    public bool isSuperMode;
+
+    public IEnumerator ProcessTimmer()
+    {
+        isSuperMode = true;
+        yield return new WaitForSeconds(1);
+        isSuperMode = false;
+        this.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public void ProcessSuperMode()
+    {
+        if (isSuperMode)
+        {
+            SpriteRenderer spriteRenderer = this.GetComponent<SpriteRenderer>();
+            Color color = spriteRenderer.color;
+            if (color.a == 1)
+                color.a = 0;
+            else
+                color.a = 1;
+            spriteRenderer.color = color;
+        }
+    }
+
+    private void Start()
+    {
+        StartCoroutine(ProcessTimmer());
+    }
+
     private void OnDestroy()
     {
         //GameObject.Find("GameManager").GetComponent<GameManager>().Life--; //작동은하지만 객체에 접근하는데 연산이 필요하다.
+        Debug.Log(gameObject.name+".OnDestroy()");
         GameManager.GetInstance().Life--;
     }
 
@@ -65,6 +95,8 @@ public class Dynamic : MonoBehaviour
 
         //이동: 시간에 따라 위치가 변경되는 것.
         //transform.position += Vector3.right * Time.deltaTime;
+
+        ProcessSuperMode();
     }
 
     private void OnGUI()
@@ -94,7 +126,7 @@ public class Dynamic : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("OnTriggerEnter2D:" + collision.gameObject.name);
+        Debug.Log("OnTriggerEnter2D:" + collision.gameObject.name);
         if(collision.gameObject.name == "Lodder")
         {
             Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
@@ -105,7 +137,10 @@ public class Dynamic : MonoBehaviour
 
         if (collision.gameObject.name == "house")
         {
-            
+            ////하이라키상에 모든객체에서 원하는 게임오브젝틀 검색하여 게임관리자 스크립트에 접근함.
+            //GameObject.Find("GameManager").GetComponent<GameManager>().guiManager.SetGUIState(GUIManager.E_SCENE.THEEND);
+            //객체를 검색하지않고 바로 게임관리자에 접근한다.
+            GameManager.GetInstance().guiManager.SetGUIState(GUIManager.E_SCENE.THEEND);
         }
     }
 

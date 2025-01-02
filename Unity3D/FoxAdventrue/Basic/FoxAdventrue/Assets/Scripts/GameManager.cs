@@ -18,6 +18,25 @@ public class GameManager : MonoBehaviour
             if (i < Life) listLifes[i].SetActive(true);
             else listLifes[i].SetActive(false);
         }
+
+        if(Life <= 0)
+        {
+            guiManager.SetGUIState(GUIManager.E_SCENE.GAMEOVER);
+        }
+    }
+
+    public void EventExit()
+    {
+        Application.Quit();
+    }
+
+    public void EventReset()
+    {
+        for(int i = 0; i < responnerMonsters.Count; i++)
+        {
+            responnerMonsters[i].objTarget.transform.position = responnerMonsters[i].transform.position;
+        }
+        Life = 3;
     }
 
     //싱글톤: 모든 클래스에서 게임관리자인스턴스에 접근하도록 만드는 패턴.//전역변수,정적멤버,객체의 참조

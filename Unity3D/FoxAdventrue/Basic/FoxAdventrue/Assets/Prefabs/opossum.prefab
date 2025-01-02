@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 547465025207244055}
   - component: {fileID: 547465025207244054}
   - component: {fileID: 114793241997457314}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: opossum
   m_TagString: Monster
   m_Icon: {fileID: 0}

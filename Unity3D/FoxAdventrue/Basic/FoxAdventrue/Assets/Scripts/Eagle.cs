@@ -115,9 +115,23 @@ public class Eagle : MonoBehaviour
 
     private void FixedUpdate()
     {
+        AttackProcess();
         FindProcess();
         MoveProcess();
         UpdateState();
+    }
+
+    public void AttackProcess()
+    {
+        Vector2 vPos = this.transform.position;
+        CircleCollider2D circleCollider = this.GetComponent<CircleCollider2D>();
+        Collider2D collider = Physics2D.OverlapCircle(vPos + circleCollider.offset, circleCollider.radius, 1 << LayerMask.NameToLayer("Player"));
+
+        if (collider)
+        {
+            if (collider.gameObject.GetComponent<Dynamic>().isSuperMode == false)
+                Destroy(collider.gameObject);
+        }
     }
 
     public void FindProcess()
@@ -179,7 +193,8 @@ public class Eagle : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            Destroy(collision.gameObject);
+            if (collision.gameObject.GetComponent<Dynamic>().isSuperMode == false)
+                Destroy(collision.gameObject);
         }
     }
 }
