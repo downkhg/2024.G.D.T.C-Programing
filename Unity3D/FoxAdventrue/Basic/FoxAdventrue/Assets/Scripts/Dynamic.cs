@@ -8,6 +8,7 @@ public class Dynamic : MonoBehaviour
     public float Speed = 1;
     //public bool isGround; //게임은 현실의 물리와 같지 않은경우도 허용하기도 하므로, 
     public bool isJump; //필요한 조건인 점프인지 확인하는것이 더 정확한 코드가 된다.
+    public bool isLodder;
     public int Score;
 
     // Update is called once per frame
@@ -19,7 +20,16 @@ public class Dynamic : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
             transform.position += Vector3.left * Speed * Time.deltaTime;
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (isLodder)
+        {
+            if (Input.GetKey(KeyCode.UpArrow))
+                transform.position += Vector3.up * Speed * Time.deltaTime;
+
+            if (Input.GetKey(KeyCode.DownArrow))
+                transform.position += Vector3.down * Speed * Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isJump == false)
             {
@@ -42,7 +52,7 @@ public class Dynamic : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("OnCollisionEnter2D:"+collision.gameObject.name);
+        //Debug.Log("OnCollisionEnter2D:"+collision.gameObject.name);
         if (collision.gameObject.tag == "Object")
         {
             Destroy(collision.gameObject);
@@ -54,13 +64,31 @@ public class Dynamic : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("OnCollisionExit2D:" + collision.gameObject.name);
+        //Debug.Log("OnCollisionExit2D:" + collision.gameObject.name);
         //isGround = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("OnTriggerEnter2D:" + collision.gameObject.name);
-      
+        //Debug.Log("OnTriggerEnter2D:" + collision.gameObject.name);
+        if(collision.gameObject.name == "Lodder")
+        {
+            Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+            rigidbody.gravityScale = 0;
+            rigidbody.velocity = Vector2.zero;
+            isLodder = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        //Debug.Log("OnTriggerExit2D:" + collision.gameObject.name);
+        if (collision.gameObject.name == "Lodder")
+        {
+            Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+            rigidbody.gravityScale = 1;
+            rigidbody.velocity = Vector2.zero;
+            isLodder = false;
+        }
     }
 }

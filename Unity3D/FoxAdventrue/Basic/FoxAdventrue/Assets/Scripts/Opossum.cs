@@ -23,4 +23,12 @@ public class Opossum : MonoBehaviour
         if(collision.gameObject.tag ==  "Player")
             Destroy(collision.gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
