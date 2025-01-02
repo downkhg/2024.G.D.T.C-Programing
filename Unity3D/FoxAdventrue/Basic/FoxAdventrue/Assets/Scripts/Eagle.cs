@@ -48,7 +48,7 @@ public class Eagle : MonoBehaviour
         switch (curAIState)
         {
             case E_AI_STATUS.TRACKING:
-                if (trTargetPoint)
+                if (trTargetPoint == null)
                     SetState(E_AI_STATUS.RETURN);
                 break;
             case E_AI_STATUS.RETURN:
@@ -79,18 +79,32 @@ public class Eagle : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        Instantiate(this.gameObject, trResponPoint.position, Quaternion.identity).GetComponent<Eagle>().enabled = true;
+        //GameObject objEagle = Instantiate(this.gameObject, trResponPoint.position, Quaternion.identity);
+        //objEagle.SetActive(true);
+        //objEagle.GetComponent<Eagle>().enabled = true;
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("OnDestroy:"+gameObject.name);
+        
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(this.transform.position, Site);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(trResponPoint.position, Time.deltaTime);
+        if(trResponPoint) Gizmos.DrawSphere(trResponPoint.position, Time.deltaTime);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(trPatrolPoint.position, Time.deltaTime);
+        if(trPatrolPoint) Gizmos.DrawSphere(trPatrolPoint.position, Time.deltaTime);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(trTargetPoint.position, Time.deltaTime*2);
+        if(trTargetPoint) Gizmos.DrawWireSphere(trTargetPoint.position, Time.deltaTime*2);
     }
 
     private void Start()
@@ -102,7 +116,7 @@ public class Eagle : MonoBehaviour
     private void FixedUpdate()
     {
         FindProcess();
-        isMove = MoveProcess(trTargetPoint.position);
+        MoveProcess();
         UpdateState();
     }
 
@@ -118,48 +132,27 @@ public class Eagle : MonoBehaviour
         }
     }
 
-    public void PatrolProcess()
+
+    public bool MoveProcess()
     {
         if (trTargetPoint)
         {
-            isMove = MoveProcess(trTargetPoint.position);
-            if (isMove == false)
+            Vector3 vTargetPos = trTargetPoint.position;
+            Vector3 vPos = this.transform.position;
+            Vector3 vDist = vTargetPos - vPos;//위치의 차이를 이용한 거리구하기
+            Vector3 vDir = vDist.normalized;//두물체사이의 방향(평준화-거리를뺀 이동량)
+            float fDist = vDist.magnitude; //두물체사이의 거리(스칼라-순수이동량)
+
+            if (fDist > Time.deltaTime)//한프레임의 이동거리보다 클때만 이동한다.
             {
-                if (isPatrol)
-                {
-                    if (trTargetPoint.gameObject.name == trPatrolPoint.gameObject.name)
-                    {
-                        trTargetPoint = trResponPoint;
-                    }
-                    else if (trTargetPoint.gameObject.name == trResponPoint.gameObject.name)
-                    {
-                        trTargetPoint = trPatrolPoint;
-                    }
-                }
-                else if (isReturn)
-                {
-                    isReturn = false;
-                    isPatrol = true;
-                    trTargetPoint = trPatrolPoint;
-                }
+                transform.position += vDir * Speed * Time.deltaTime;
+                isMove = true;
+                return true;
             }
+            else
+                isMove = false;
         }
-    }
-
-    public bool MoveProcess(Vector3 vTargetPos)
-    {
-        Vector3 vPos = this.transform.position;
-        Vector3 vDist = vTargetPos - vPos;//위치의 차이를 이용한 거리구하기
-        Vector3 vDir = vDist.normalized;//두물체사이의 방향(평준화-거리를뺀 이동량)
-        float fDist = vDist.magnitude; //두물체사이의 거리(스칼라-순수이동량)
-
-        if (fDist > Time.deltaTime)//한프레임의 이동거리보다 클때만 이동한다.
-        {
-            transform.position += vDir * Speed * Time.deltaTime;
-            return true;
-        }
-        else
-            return false;
+        return false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -182,6 +175,11 @@ public class Eagle : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             Destroy(this.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(collision.gameObject);
         }
     }
 }
