@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,6 +31,12 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void EventScenceChange(string name)
+    {
+        DontDestroyOnLoad(this.gameObject);
+        SceneManager.LoadScene(name);
+    }
+
     public void EventReset()
     {
         for(int i = 0; i < responnerMonsters.Count; i++)
@@ -51,7 +58,17 @@ public class GameManager : MonoBehaviour
     public void Awake()
     {
         instance = this;
+        Initalize(); //만약이전에 객체들을 재활용이 불가능하다면, 다음과 같이 게임관리자 작업시 모두 초기화하여 사용해야한다.
         guiManager.Initialize();
+    }
+
+    public void Initalize()
+    {
+        if (resoponnerPlayer == null)
+        {
+            GameObject objPlayerRespon = Resources.Load("Prefabs/PlayerResponner") as GameObject;
+            resoponnerPlayer = objPlayerRespon.GetComponent<Responner>();
+        }
     }
 
     public enum E_MONSTER{ OPPOSUM, EAGLE, FROG }
@@ -108,5 +125,11 @@ public class GameManager : MonoBehaviour
         ProcessSetPatrol();
         ProcessLife();
         guiManager.UpdateGUIState();
+        guiManager.UpdatePlayerStatusBar(resoponnerPlayer.objTarget.GetComponent<Player>());
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            EventScenceChange("Game");
+        }
     }
 }

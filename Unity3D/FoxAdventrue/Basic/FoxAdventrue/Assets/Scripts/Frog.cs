@@ -169,20 +169,34 @@ public class Frog : MonoBehaviour
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
         Collider2D collider = Physics2D.OverlapBox(vPos, boxCollider.size, 0, 1 << LayerMask.NameToLayer("Player"));
 
-        if(collider)
+        if (collider)
         {
-            if (collider.gameObject.GetComponent<Dynamic>().isSuperMode == false)
-                Destroy(collider.gameObject);
+            Dynamic dynamic = collider.gameObject.GetComponent<Dynamic>();
+
+            if (dynamic.isSuperMode == false)
+            {
+                Player player = GetComponent<Player>();
+                Player target = collider.transform.GetComponent<Player>();
+                player.Attack(target);
+                dynamic.ActiveSuperMode(1);
+            }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
-        {
-            if(collision.gameObject.GetComponent<Dynamic>().isSuperMode == false)
-                Destroy(collision.gameObject);
-        }
+        //if(collision.gameObject.tag == "Player")
+        //{
+        //    Dynamic dynamic = collision.gameObject.GetComponent<Dynamic>();
+
+        //    if (dynamic.isSuperMode == false)
+        //    {
+        //        Player player = GetComponent<Player>();
+        //        Player target = collision.transform.GetComponent<Player>();
+        //        player.Attack(target);
+        //        dynamic.ActiveSuperMode(1);
+        //    }
+        //}
 
         isJump = false;
     }

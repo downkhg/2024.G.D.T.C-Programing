@@ -129,8 +129,15 @@ public class Eagle : MonoBehaviour
 
         if (collider)
         {
-            if (collider.gameObject.GetComponent<Dynamic>().isSuperMode == false)
-                Destroy(collider.gameObject);
+            Dynamic dynamic = collider.gameObject.GetComponent<Dynamic>();
+
+            if (dynamic.isSuperMode == false)
+            { 
+                Player player = GetComponent<Player>();
+                Player target = collider.transform.GetComponent<Player>();
+                player.Attack(target);
+                dynamic.ActiveSuperMode(1);
+            }
         }
     }
 
@@ -184,17 +191,21 @@ public class Eagle : MonoBehaviour
         //}
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Bullet")
-        {
-            Destroy(this.gameObject);
-        }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Bullet")
+    //    {
+    //        Destroy(this.gameObject);
+    //    }
 
-        if (collision.gameObject.tag == "Player")
-        {
-            if (collision.gameObject.GetComponent<Dynamic>().isSuperMode == false)
-                Destroy(collision.gameObject);
-        }
-    }
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        if (collision.gameObject.GetComponent<Dynamic>().isSuperMode == false)
+    //        {
+    //            Player player = GetComponent<Player>();
+    //            Player target = collision.transform.GetComponent<Player>();
+    //            player.Attack(target);
+    //        }
+    //    }
+    //}
 }

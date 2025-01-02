@@ -8,6 +8,16 @@ public class GUIManager : MonoBehaviour
     public enum E_SCENE { PLAY, TITLE, THEEND, GAMEOVER, MAX }
     public E_SCENE curScene;
 
+    public GUIStatusBar guiHPBar;
+
+    public void UpdatePlayerStatusBar(Player player)
+    {
+        if(guiHPBar && player)
+        {
+            guiHPBar.SetBar(player.Status.hp, player.MaxHP);
+        }
+    }
+
     public void Initialize()
     {
         gameObject.SetActive(true);

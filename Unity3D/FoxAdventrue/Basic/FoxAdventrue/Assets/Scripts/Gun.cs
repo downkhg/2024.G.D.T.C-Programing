@@ -48,7 +48,13 @@ public class Gun : MonoBehaviour
                         if (raycastHit.collider)
                         {
                             vLeaserEnd = raycastHit.point;
-                            Destroy(raycastHit.collider.gameObject);
+
+                            Player player = GameManager.GetInstance().resoponnerPlayer.objTarget.GetComponent<Player>();
+                            Player target = raycastHit.collider.GetComponent<Player>();
+
+                            player.Attack(target);
+
+                            //Destroy(raycastHit.collider.gameObject);
                             Debug.DrawLine(vStart, vLeaserEnd, Color.red);
 
                             lineRenderer.SetPosition(0, vStart);
