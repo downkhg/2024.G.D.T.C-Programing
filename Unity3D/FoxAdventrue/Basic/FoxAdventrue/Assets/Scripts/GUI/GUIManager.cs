@@ -16,6 +16,7 @@ public class GUIManager : MonoBehaviour
         {
             guiHPBar.SetBar(player.Status.hp, player.MaxHP);
         }
+        GameObject prefabButton = Resources.Load("Prefabs/GUI/ItemButton") as GameObject;
     }
 
     public void Initialize()
