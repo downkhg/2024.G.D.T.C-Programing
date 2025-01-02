@@ -5,8 +5,9 @@
     "\\Unity3D\\FoxAdventrue",
     "\\Unity3D\\FoxAdventrue\\Basic",
     "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue",
-    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets"
+    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets",
+    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\Scripts"
   ],
-  "SelectedNode": "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\WorkList.txt",
+  "SelectedNode": "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\Scripts\\Dynamic.cs",
   "PreviewInSolutionExplorer": false
 }

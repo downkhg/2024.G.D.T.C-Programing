@@ -6,7 +6,8 @@ public class Dynamic : MonoBehaviour
 {
     public float JumpPower;
     public float Speed = 1;
-    public bool isGround;
+    //public bool isGround; //게임은 현실의 물리와 같지 않은경우도 허용하기도 하므로, 
+    public bool isJump; //필요한 조건인 점프인지 확인하는것이 더 정확한 코드가 된다.
     public int Score;
 
     // Update is called once per frame
@@ -20,10 +21,12 @@ public class Dynamic : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            if (isGround)
+            if (isJump == false)
             {
                 Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+                rigidbody.velocity = Vector2.zero;
                 rigidbody.AddForce(Vector3.up * JumpPower);
+                isJump = true;
             }
         }
 
@@ -34,27 +37,30 @@ public class Dynamic : MonoBehaviour
     private void OnGUI()
     {
         GUI.Box(new Rect(0, 0, 200, 20), "Score:" + Score);
+        //GUI.Box(new Rect(20, 0, 200, 20), "Ground:" + isGround);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name != "Ground")
+        Debug.Log("OnCollisionEnter2D:"+collision.gameObject.name);
+        if (collision.gameObject.tag == "Object")
+        {
             Destroy(collision.gameObject);
-        if (collision.gameObject.name == "crate")
             Score++;
+        }
        
-        isGround = true;
+        isJump = false;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //땅을 벗어난 경우(땅에서 떨어질때도 작동하여 의도하지않은 코드를 만든다)
-        isGround = false;
+        Debug.Log("OnCollisionExit2D:" + collision.gameObject.name);
+        //isGround = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "cherry")
-            Score += 10;
+        Debug.Log("OnTriggerEnter2D:" + collision.gameObject.name);
+      
     }
 }
