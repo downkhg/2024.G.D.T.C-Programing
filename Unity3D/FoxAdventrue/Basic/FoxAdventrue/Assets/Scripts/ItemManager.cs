@@ -28,6 +28,7 @@ public class ItemInfo
 
     public void Use(Dynamic dynamic)
     {
+        Debug.Log(item_effect + " Use:"+dynamic.gameObject.name + "Start!");
         switch(item_effect)
         {
             case E_ITEM_EFFECT.SUPERMODE:
@@ -46,6 +47,7 @@ public class ItemInfo
                 dynamic.gun.SetBullet(Gun.E_BULLET_TYPE.LESAER);
                 break;
         }
+        Debug.Log(item_effect + " Use:" + dynamic.gameObject.name + "End!");
     }
 }
 

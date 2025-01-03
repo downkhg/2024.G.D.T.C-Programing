@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Iventory : MonoBehaviour
 {
-    public List<Item> listItems;
+    public List<ItemInfo> listItems;
 
-    public void SetIventory(Item item)
+    public void SetIventory(ItemInfo item)
     {
         listItems.Add(item);
     }
 
-    public void UseIventory(Item item)
+    public void UseIventory(ItemInfo item)
     {
+        item.Use(this.gameObject.GetComponent<Dynamic>());
         listItems.Remove(item);
     }
 
@@ -22,7 +23,10 @@ public class Iventory : MonoBehaviour
         int h = 20;
         for(int i = 0; i < listItems.Count; i++)
         {
-            GUI.Box(new Rect(0,i*h,w,h), listItems[i].gameObject.name);
+            if(GUI.Button(new Rect(0,i*h,w,h), listItems[i].name))
+            {
+                UseIventory(listItems[i]);
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public Responner resoponnerPlayer;
+    public Iventory iventoryPlayer;
     public List<Responner> responnerMonsters;
 
     public List<GameObject> listLifes;
@@ -16,8 +17,10 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < listLifes.Count; i++)
         {
-            if (i < Life) listLifes[i].SetActive(true);
-            else listLifes[i].SetActive(false);
+            if (i < Life) 
+                listLifes[i].SetActive(true);
+            else 
+                listLifes[i].SetActive(false);
         }
 
         if(Life <= 0)
@@ -59,7 +62,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         Initalize(); //만약이전에 객체들을 재활용이 불가능하다면, 다음과 같이 게임관리자 작업시 모두 초기화하여 사용해야한다.
-        guiManager.Initialize();
+        guiManager.Initialize(this);
     }
 
     public void Initalize()

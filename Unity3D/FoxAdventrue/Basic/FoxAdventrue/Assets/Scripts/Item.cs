@@ -20,6 +20,12 @@ public class Item : MonoBehaviour
         }
     }
 
+    public void UseItem(Dynamic dynamic)
+    {
+        ItemInfo itemInfo = GameManager.GetInstance().ItemManager.GetItemInfo(Itemtype);
+        itemInfo.Use(dynamic);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,12 +42,13 @@ public class Item : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log(gameObject.name + ".OnTriggerEnter2D:"+ collision.name);
-        Dynamic dynamic = collision.gameObject.GetComponent<Dynamic>();
-
         //if (collision.gameObject.name == "player")
         if (collision.gameObject.tag == "Player")
         {
-             GameManager.GetInstance().ItemManager.GetItemInfo(Itemtype);
+            ItemInfo itemInfo = GameManager.GetInstance().ItemManager.GetItemInfo(this.Itemtype);
+            //UseItem(collision.gameObject.GetComponent<Dynamic>());
+            GameManager.GetInstance().iventoryPlayer.SetIventory(itemInfo);
+            Destroy(this.gameObject);
         }
     }
 }
