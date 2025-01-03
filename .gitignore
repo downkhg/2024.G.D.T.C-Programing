@@ -1,9 +1,8 @@
 ﻿################################################################################
 # 이 .gitignore 파일은 Microsoft(R) Visual Studio에서 자동으로 만들어졌습니다.
 ################################################################################
-
-/.vs/2024.G.D.T.C-Programing/FileContentIndex
 /Unity3D/FoxAdventrue/.vs/FoxAdventrue/FileContentIndex
 /Unity3D/FoxAdventrue/Basic/Backup/.vs/Backup/FileContentIndex
 /Unity3D/FoxAdventrue/Basic/FoxAdventrue/Assets/.vs/Assets/FileContentIndex
 *.wsuo
+/.vs/2024.G.D.T.C-Programing/FileContentIndex
