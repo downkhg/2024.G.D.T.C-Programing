@@ -24,11 +24,12 @@ public class ItemInfo
         imgIcon = Resources.Load<Sprite>("Item/" + _img_icon_name);
         eat_effect = _eat_effect_name;
         object_prefab = Resources.Load("Prefabs/Item/" + _object_name) as GameObject;
+        if (object_prefab == null) Debug.LogErrorFormat( _object_name +" is Load Fail!");
     }
 
     public void Use(Dynamic dynamic)
     {
-        Debug.Log(item_effect + " Use:"+dynamic.gameObject.name + "Start!");
+        //Debug.Log(item_effect + " Use:"+dynamic.gameObject.name + "Start!");
         switch(item_effect)
         {
             case E_ITEM_EFFECT.SUPERMODE:
@@ -47,7 +48,7 @@ public class ItemInfo
                 dynamic.gun.SetBullet(Gun.E_BULLET_TYPE.LESAER);
                 break;
         }
-        Debug.Log(item_effect + " Use:" + dynamic.gameObject.name + "End!");
+        //Debug.Log(item_effect + " Use:" + dynamic.gameObject.name + "End!");
     }
 }
 

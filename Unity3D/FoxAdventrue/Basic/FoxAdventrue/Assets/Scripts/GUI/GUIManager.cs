@@ -11,6 +11,11 @@ public class GUIManager : MonoBehaviour
 
     public GUIStatusBar guiHPBar;
 
+    private void Awake()
+    {
+        ClearItemInfoPannel();
+    }
+
     public void UpdatePlayerStatusBar(Player player)
     {
         if(guiHPBar && player)
@@ -27,6 +32,7 @@ public class GUIManager : MonoBehaviour
         {
             objPopupLayer.SetActive(true);
             SetItemButtons(iventory,dynamic);
+            SetItemInfoPannel(iventory.GetIventory(0), dynamic);
         }
         else
         {
@@ -40,12 +46,39 @@ public class GUIManager : MonoBehaviour
     public Text textItemInfoPanelContent;
     public Button buttonItemInfoPanelButton;
 
+    public void ClearItemInfoPannel()
+    {
+        //Destroy(imgItemInfoPanel.sprite);
+        imgItemInfoPanel.color = Color.clear;
+        textItemInfoPanelName.text = "";
+        textItemInfoPanelContent.text = "";
+        buttonItemInfoPanelButton.gameObject.SetActive(false);
+        buttonItemInfoPanelButton.onClick.RemoveAllListeners();
+    }
+
     public void SetItemInfoPannel(ItemInfo itemInfo, Dynamic dynamic)
     {
         imgItemInfoPanel.sprite = itemInfo.imgIcon;
+        
+        SpriteRenderer spriteRenderer = itemInfo.object_prefab.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+            imgItemInfoPanel.color = spriteRenderer.color;
+        else
+            imgItemInfoPanel.color = Color.white;
         textItemInfoPanelName.text = itemInfo.name;
         textItemInfoPanelContent.text = itemInfo.content;
-        buttonItemInfoPanelButton.onClick.AddListener(() => itemInfo.Use(dynamic));
+        buttonItemInfoPanelButton.gameObject.SetActive(true);
+        buttonItemInfoPanelButton.onClick.RemoveAllListeners();
+        buttonItemInfoPanelButton.onClick.AddListener(
+            () =>
+            {
+                //itemInfo.Use(dynamic);
+                Debug.Log("Click Buttion!"+ itemInfo.name);
+                GameManager.GetInstance().iventoryPlayer.UseIventory(itemInfo, dynamic);
+                UpdateItemButton(GameManager.GetInstance().iventoryPlayer , dynamic);
+                Debug.Log("Click Buttion!");
+            }
+        );
     }
 
     public void EventTestSetItemInfoPannel()
@@ -65,6 +98,11 @@ public class GUIManager : MonoBehaviour
         {
             GameObject objButton = Instantiate(prefabButton, rectItemContent.transform);
             GUIItemButton guiItemButton = objButton.GetComponent<GUIItemButton>();
+            SpriteRenderer spriteRenderer = iteminfo.object_prefab.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+                guiItemButton.imgItemIcon.color = spriteRenderer.color;
+            else
+                imgItemInfoPanel.color = Color.white;
             guiItemButton.Set(this, iteminfo, dynamic);
             listItemButton.Add(guiItemButton);
         }
@@ -77,12 +115,24 @@ public class GUIManager : MonoBehaviour
 
     public void ReleaseItemButtons()
     {
-        GameObject prefabButton = Resources.Load("Prefabs/GUI/ItemButton") as GameObject;
         foreach (GUIItemButton itemButton in listItemButton)
         {
             Destroy(itemButton.gameObject);
         }
         listItemButton.Clear();
+    }
+
+    public void UpdateItemButton(Iventory iventory, Dynamic dynamic)
+    {
+        ReleaseItemButtons();
+        SetItemButtons(iventory, dynamic);
+
+        ItemInfo itemInfo = iventory.GetIventory(0);
+        if (itemInfo != null)
+            SetItemInfoPannel(itemInfo, dynamic);
+        else
+            ClearItemInfoPannel();
+
     }
 
     public void EventTestSetItemButton()

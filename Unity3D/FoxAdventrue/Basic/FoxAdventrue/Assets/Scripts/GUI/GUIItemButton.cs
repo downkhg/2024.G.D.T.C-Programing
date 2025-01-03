@@ -15,6 +15,11 @@ public class GUIItemButton : MonoBehaviour
         textItemName.text = itemInfo.name;
         imgItemIcon.sprite = itemInfo.imgIcon;
         btnItemButton = this.gameObject.GetComponent<Button>();
-        btnItemButton.onClick.AddListener(() => guiManager.SetItemInfoPannel(itemInfo, dynamic));
+        btnItemButton.onClick.AddListener(
+            () => 
+            { 
+                guiManager.SetItemInfoPannel(itemInfo, dynamic);
+            }
+        );
     }
 }

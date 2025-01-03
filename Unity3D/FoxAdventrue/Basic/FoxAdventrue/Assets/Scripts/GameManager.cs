@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public CameraTracker cameraTracker;
     public Responner resoponnerPlayer;
     public Iventory iventoryPlayer;
     public List<Responner> responnerMonsters;
@@ -116,6 +117,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void UpdateCameraTracker()
+    {
+        if (resoponnerPlayer.objTarget)
+        {
+            cameraTracker.trTargetPoint = resoponnerPlayer.objTarget.transform;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -125,6 +134,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateCameraTracker();
         ProcessSetPatrol();
         ProcessLife();
         guiManager.UpdateGUIState();

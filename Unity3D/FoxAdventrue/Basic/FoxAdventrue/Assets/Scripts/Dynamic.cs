@@ -26,12 +26,12 @@ public class Dynamic : MonoBehaviour
 
     public IEnumerator ProcessTimmer(float item)
     {
-        Debug.Log("ProcessTimmer 1");
+        //Debug.Log("ProcessTimmer 1");
         isSuperMode = true;
         yield return new WaitForSeconds(item);
         isSuperMode = false;
         this.GetComponent<SpriteRenderer>().color = Color.white;
-        Debug.Log("ProcessTimmer 2");
+        //Debug.Log("ProcessTimmer 2");
     }
 
     public void ProcessSuperMode()
@@ -133,7 +133,7 @@ public class Dynamic : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("OnTriggerEnter2D:" + collision.gameObject.name);
+        //Debug.Log("OnTriggerEnter2D:" + collision.gameObject.name);
         if(collision.gameObject.name == "Lodder")
         {
             Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();

@@ -11,9 +11,17 @@ public class Iventory : MonoBehaviour
         listItems.Add(item);
     }
 
-    public void UseIventory(ItemInfo item)
+    public ItemInfo GetIventory(int idx)
     {
-        item.Use(this.gameObject.GetComponent<Dynamic>());
+        if(listItems.Count > 0)
+            return listItems[idx];
+        else
+            return null;
+    }
+
+    public void UseIventory(ItemInfo item, Dynamic dynamic)
+    {
+        item.Use(dynamic);
         listItems.Remove(item);
     }
 
@@ -25,7 +33,7 @@ public class Iventory : MonoBehaviour
         {
             if(GUI.Button(new Rect(0,i*h,w,h), listItems[i].name))
             {
-                UseIventory(listItems[i]);
+                UseIventory(listItems[i], GameManager.GetInstance().resoponnerPlayer.objTarget.GetComponent<Dynamic>());
             }
         }
     }
