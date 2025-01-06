@@ -72,11 +72,13 @@
     <Compile Include="Assets\Scripts\DeathObject.cs" />
     <Compile Include="Assets\Scripts\Frog.cs" />
     <Compile Include="Assets\HierachyWindow\EditorScript\ScenePickerEditor.cs" />
+    <Compile Include="Assets\Scripts\GUI\GUIItemInfoPanel.cs" />
     <Compile Include="Assets\HierachyWindow\UnityObject.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\CameraTracker.cs" />
     <Compile Include="Assets\Scripts\DeathZone.cs" />
+    <Compile Include="Assets\Scripts\GUI\GUIIventory.cs" />
     <Compile Include="Assets\HierachyWindow\ScenePicker.cs" />
     <Compile Include="Assets\Scripts\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
