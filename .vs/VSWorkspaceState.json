@@ -6,8 +6,9 @@
     "\\Unity3D\\FoxAdventrue\\Basic",
     "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue",
     "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets",
-    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\Scripts"
+    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\Scripts",
+    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\Scripts\\GUI"
   ],
-  "SelectedNode": "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\Scripts\\Dynamic.cs",
+  "SelectedNode": "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\Scripts\\GUI\\GUIIventory.cs",
   "PreviewInSolutionExplorer": false
 }

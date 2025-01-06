@@ -9,11 +9,15 @@ public class GUIManager : MonoBehaviour
     public enum E_SCENE { PLAY, TITLE, THEEND, GAMEOVER, MAX }
     public E_SCENE curScene;
 
+    public GUIIventory guiIventory;
+
+    GameManager gameManager;
+
     public GUIStatusBar guiHPBar;
 
     private void Awake()
     {
-        ClearItemInfoPannel();
+        
     }
 
     public void UpdatePlayerStatusBar(Player player)
@@ -31,118 +35,14 @@ public class GUIManager : MonoBehaviour
         if (objPopupLayer.activeSelf == false)
         {
             objPopupLayer.SetActive(true);
-            SetItemButtons(iventory,dynamic);
-            SetItemInfoPannel(iventory.GetIventory(0), dynamic);
+            guiIventory.InitializeGUI(iventory, dynamic);
         }
         else
         {
             objPopupLayer.SetActive(false);
-            ReleaseItemButtons();
+            guiIventory.ReleaseGUI();
         }
     }
-
-    public Image imgItemInfoPanel;
-    public Text textItemInfoPanelName;
-    public Text textItemInfoPanelContent;
-    public Button buttonItemInfoPanelButton;
-
-    public void ClearItemInfoPannel()
-    {
-        //Destroy(imgItemInfoPanel.sprite);
-        imgItemInfoPanel.color = Color.clear;
-        textItemInfoPanelName.text = "";
-        textItemInfoPanelContent.text = "";
-        buttonItemInfoPanelButton.gameObject.SetActive(false);
-        buttonItemInfoPanelButton.onClick.RemoveAllListeners();
-    }
-
-    public void SetItemInfoPannel(ItemInfo itemInfo, Dynamic dynamic)
-    {
-        imgItemInfoPanel.sprite = itemInfo.imgIcon;
-        
-        SpriteRenderer spriteRenderer = itemInfo.object_prefab.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-            imgItemInfoPanel.color = spriteRenderer.color;
-        else
-            imgItemInfoPanel.color = Color.white;
-        textItemInfoPanelName.text = itemInfo.name;
-        textItemInfoPanelContent.text = itemInfo.content;
-        buttonItemInfoPanelButton.gameObject.SetActive(true);
-        buttonItemInfoPanelButton.onClick.RemoveAllListeners();
-        buttonItemInfoPanelButton.onClick.AddListener(
-            () =>
-            {
-                //itemInfo.Use(dynamic);
-                Debug.Log("Click Buttion!"+ itemInfo.name);
-                GameManager.GetInstance().iventoryPlayer.UseIventory(itemInfo, dynamic);
-                UpdateItemButton(GameManager.GetInstance().iventoryPlayer , dynamic);
-                Debug.Log("Click Buttion!");
-            }
-        );
-    }
-
-    public void EventTestSetItemInfoPannel()
-    {
-        ItemInfo itemInfo = GameManager.GetInstance().ItemManager.GetItemInfo(ItemManager.E_ITEM_TYPE.GEM);
-        Dynamic dynamic = GameManager.GetInstance().resoponnerPlayer.objTarget.GetComponent<Dynamic>();
-        SetItemInfoPannel(itemInfo, dynamic);
-    }
-
-    public List<GUIItemButton> listItemButton;
-    public RectTransform rectItemContent;
-
-    public void SetItemButtons(Iventory iventory, Dynamic dynamic)
-    {
-        GameObject prefabButton = Resources.Load("Prefabs/GUI/ItemButton") as GameObject;
-        Debug.LogFormat("SetItemButtons[{0}]",iventory.listItems.Count);
-        foreach (ItemInfo iteminfo in iventory.listItems)
-        {
-            GameObject objButton = Instantiate(prefabButton, rectItemContent.transform);
-            GUIItemButton guiItemButton = objButton.GetComponent<GUIItemButton>();
-            SpriteRenderer spriteRenderer = iteminfo.object_prefab.GetComponent<SpriteRenderer>();
-            if (spriteRenderer != null)
-                guiItemButton.imgItemIcon.color = spriteRenderer.color;
-            else
-                imgItemInfoPanel.color = Color.white;
-            guiItemButton.Set(this, iteminfo, dynamic);
-            listItemButton.Add(guiItemButton);
-        }
-        GridLayoutGroup gridLayoutGroupContent = rectItemContent.GetComponent<GridLayoutGroup>();
-        Vector2 vButtonSize = gridLayoutGroupContent.cellSize;
-        Vector2 vContentSize = rectItemContent.sizeDelta;
-        vContentSize.y = vButtonSize.y * listItemButton.Count;
-        rectItemContent.sizeDelta = vContentSize;
-    }
-
-    public void ReleaseItemButtons()
-    {
-        foreach (GUIItemButton itemButton in listItemButton)
-        {
-            Destroy(itemButton.gameObject);
-        }
-        listItemButton.Clear();
-    }
-
-    public void UpdateItemButton(Iventory iventory, Dynamic dynamic)
-    {
-        ReleaseItemButtons();
-        SetItemButtons(iventory, dynamic);
-
-        ItemInfo itemInfo = iventory.GetIventory(0);
-        if (itemInfo != null)
-            SetItemInfoPannel(itemInfo, dynamic);
-        else
-            ClearItemInfoPannel();
-    }
-
-    public void EventTestSetItemButton()
-    {
-        ItemInfo itemInfo = GameManager.GetInstance().ItemManager.GetItemInfo(ItemManager.E_ITEM_TYPE.GEM);
-        Dynamic dynamic = GameManager.GetInstance().resoponnerPlayer.objTarget.GetComponent<Dynamic>();
-        listItemButton[0].Set(this, itemInfo, dynamic);
-    }
-
-    GameManager gameManager;
 
     public void Initialize(GameManager gameManager)
     {
@@ -161,15 +61,6 @@ public class GUIManager : MonoBehaviour
                 listGUIScenes[(int)idx].SetActive(false);
         }
     }
-
-    //private void Update()
-    //{
-    //    //if(Input.GetKeyDown(KeyCode.I))
-    //    //{
-    //    //    //EventTestSetItemInfoPannel();
-    //    //    EventTestSetItemButton();
-    //    //}
-    //}
 
     public void SetGUIState(E_SCENE scene)
     {

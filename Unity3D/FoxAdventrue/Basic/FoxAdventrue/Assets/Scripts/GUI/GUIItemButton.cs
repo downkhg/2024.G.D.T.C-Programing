@@ -10,15 +10,15 @@ public class GUIItemButton : MonoBehaviour
     [SerializeField]
     Button btnItemButton;
 
-    public void Set(GUIManager guiManager, ItemInfo itemInfo, Dynamic dynamic)
+    public void Set(GUIItemInfoPanel guiItemInfoPanel, ItemInfo itemInfo, Dynamic dynamic)
     {
         textItemName.text = itemInfo.name;
         imgItemIcon.sprite = itemInfo.imgIcon;
         btnItemButton = this.gameObject.GetComponent<Button>();
         btnItemButton.onClick.AddListener(
             () => 
-            { 
-                guiManager.SetItemInfoPannel(itemInfo, dynamic);
+            {
+                guiItemInfoPanel.SetItemInfoPannel(GameManager.GetInstance().guiManager.guiIventory ,itemInfo, dynamic);
             }
         );
     }

@@ -5,10 +5,23 @@ using UnityEngine.UI;
 
 public class GUIIventory : MonoBehaviour
 {
+    public GUIItemInfoPanel guiIteminfoPanel;
     public List<GUIItemButton> listItemButton;
     public RectTransform rectItemContent;
 
-    public void SetItemButtons(GUIItemInfoPanel guiIteminfoPanel, Iventory iventory, Dynamic dynamic)
+    public void InitializeGUI(Iventory iventory, Dynamic dynamic)
+    {
+        SetItemButtons(iventory, dynamic);
+        if(iventory !=null && iventory.listItems.Count > 0)
+            guiIteminfoPanel.SetItemInfoPannel(this,iventory.GetIventory(0), dynamic);
+    }
+
+    public void ReleaseGUI()
+    {
+        ReleaseItemButtons();
+    }
+
+    public void SetItemButtons(Iventory iventory, Dynamic dynamic)
     {
         GameObject prefabButton = Resources.Load("Prefabs/GUI/ItemButton") as GameObject;
         Debug.LogFormat("SetItemButtons[{0}]", iventory.listItems.Count);
@@ -21,7 +34,7 @@ public class GUIIventory : MonoBehaviour
                 guiItemButton.imgItemIcon.color = spriteRenderer.color;
             else
                 guiIteminfoPanel.imgItemInfoPanel.color = Color.white;
-            guiItemButton.Set(GameManager.GetInstance().guiManager, iteminfo, dynamic);
+            guiItemButton.Set(guiIteminfoPanel, iteminfo, dynamic);
             listItemButton.Add(guiItemButton);
         }
         GridLayoutGroup gridLayoutGroupContent = rectItemContent.GetComponent<GridLayoutGroup>();
@@ -40,23 +53,24 @@ public class GUIIventory : MonoBehaviour
         listItemButton.Clear();
     }
 
-    public void UpdateItemButton(GUIItemInfoPanel guiIteminfoPanel, Iventory iventory, Dynamic dynamic)
+    public void UpdateItemButton(Iventory iventory, Dynamic dynamic)
     {
         ReleaseItemButtons();
-        SetItemButtons(guiIteminfoPanel,iventory, dynamic);
+        SetItemButtons(iventory, dynamic);
 
         ItemInfo itemInfo = iventory.GetIventory(0);
         if (itemInfo != null)
-            guiIteminfoPanel.SetItemInfoPannel(itemInfo, dynamic);
+            guiIteminfoPanel.SetItemInfoPannel(this, itemInfo, dynamic);
         else
             guiIteminfoPanel.ClearItemInfoPannel();
     }
+
 
     public void EventTestSetItemButton()
     {
         ItemInfo itemInfo = GameManager.GetInstance().ItemManager.GetItemInfo(ItemManager.E_ITEM_TYPE.GEM);
         Dynamic dynamic = GameManager.GetInstance().resoponnerPlayer.objTarget.GetComponent<Dynamic>();
-        listItemButton[0].Set(GameManager.GetInstance().guiManager, itemInfo, dynamic);
+        listItemButton[0].Set(guiIteminfoPanel, itemInfo, dynamic);
     }
 
     // Start is called before the first frame update

@@ -20,7 +20,7 @@ public class GUIItemInfoPanel : MonoBehaviour
         buttonItemInfoPanelButton.onClick.RemoveAllListeners();
     }
 
-    public void SetItemInfoPannel(ItemInfo itemInfo, Dynamic dynamic)
+    public void SetItemInfoPannel(GUIIventory guiIventory, ItemInfo itemInfo, Dynamic dynamic)
     {
         imgItemInfoPanel.sprite = itemInfo.imgIcon;
 
@@ -39,7 +39,7 @@ public class GUIItemInfoPanel : MonoBehaviour
                 //itemInfo.Use(dynamic);
                 Debug.Log("Click Buttion!" + itemInfo.name);
                 GameManager.GetInstance().iventoryPlayer.UseIventory(itemInfo, dynamic);
-                //UpdateItemButton(GameManager.GetInstance().iventoryPlayer, dynamic);
+                guiIventory.UpdateItemButton(GameManager.GetInstance().iventoryPlayer, dynamic);
                 Debug.Log("Click Buttion!");
             }
         );
@@ -49,7 +49,7 @@ public class GUIItemInfoPanel : MonoBehaviour
     {
         ItemInfo itemInfo = GameManager.GetInstance().ItemManager.GetItemInfo(ItemManager.E_ITEM_TYPE.GEM);
         Dynamic dynamic = GameManager.GetInstance().resoponnerPlayer.objTarget.GetComponent<Dynamic>();
-        SetItemInfoPannel(itemInfo, dynamic);
+        //SetItemInfoPannel(itemInfo, dynamic);
     }
 
 
