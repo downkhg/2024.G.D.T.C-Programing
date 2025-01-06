@@ -1,7 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Unity3D",
+    "\\Unity3D\\FoxAdventrue",
+    "\\Unity3D\\FoxAdventrue\\Basic",
+    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue",
+    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets",
+    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\Scripts"
   ],
-  "SelectedNode": "\\FoxAdventrue.sln",
+  "SelectedNode": "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\Scripts\\Dynamic.cs",
   "PreviewInSolutionExplorer": false
 }

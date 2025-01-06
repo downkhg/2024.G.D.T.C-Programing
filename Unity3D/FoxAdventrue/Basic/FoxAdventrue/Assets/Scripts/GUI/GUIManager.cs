@@ -94,6 +94,7 @@ public class GUIManager : MonoBehaviour
     public void SetItemButtons(Iventory iventory, Dynamic dynamic)
     {
         GameObject prefabButton = Resources.Load("Prefabs/GUI/ItemButton") as GameObject;
+        Debug.LogFormat("SetItemButtons[{0}]",iventory.listItems.Count);
         foreach (ItemInfo iteminfo in iventory.listItems)
         {
             GameObject objButton = Instantiate(prefabButton, rectItemContent.transform);
@@ -132,7 +133,6 @@ public class GUIManager : MonoBehaviour
             SetItemInfoPannel(itemInfo, dynamic);
         else
             ClearItemInfoPannel();
-
     }
 
     public void EventTestSetItemButton()
