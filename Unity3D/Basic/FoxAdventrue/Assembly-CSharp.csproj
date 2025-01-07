@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\CameraTracker.cs" />
     <Compile Include="Assets\Scripts\DeathZone.cs" />
+    <Compile Include="Assets\Scripts\GUI\GUIOption.cs" />
     <Compile Include="Assets\Scripts\GUI\GUIIventory.cs" />
     <Compile Include="Assets\HierachyWindow\ScenePicker.cs" />
     <Compile Include="Assets\Scripts\ItemManager.cs" />

@@ -134,7 +134,6 @@ public class GameManager : MonoBehaviour
     public bool EventChangeLanguage(string language)
     {
         if (curLanguage == language) return false;
-        languageDAO.RemvoeDataBase();
         languageDAO.AccessDataBase(language);
         guiManager.ActiveGUI(true);
         foreach (LanguageDTO lang in languageDAO.languages)
@@ -179,6 +178,7 @@ public class GameManager : MonoBehaviour
         }
         guiManager.ActiveGUI(false);
         guiManager.SetGUIState(guiManager.curScene);
+        languageDAO.RemvoeDataBase();
         curLanguage = language;
         return true;
     }
