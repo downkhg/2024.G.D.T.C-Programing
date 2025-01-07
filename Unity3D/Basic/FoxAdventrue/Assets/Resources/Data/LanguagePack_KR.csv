@@ -1,0 +1,15 @@
+id,Secene,Type,UI,Text,Image,Color
+1,Title,Image,BackGround,,back,white
+2,Title,Text,MainText,여우의 모험,,black
+3,Title,Button,Start,시작,,black
+4,Title,Button,Exit,나가기,,black
+5,GameOver,Image,BackGround,,back,red
+6,GameOver,Text,MainTextShadow,GAME OVER,,black
+7,GameOver,Text,MainText,GAME OVER,,red
+8,GameOver,Button,Retry,재도전,,black
+9,GameOver,Button,Exit,나가기,,black
+10,TheEnd,Image,BackGround,,back,
+11,TheEnd,Text,MainTextShadow,The End,,black
+12,TheEnd,Text,MainText,The End,,white
+13,TheEnd,Button,ToTitle,타이틀,,black
+14,TheEnd,Button,Exit,나가기,,black

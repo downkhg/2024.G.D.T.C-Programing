@@ -1,14 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Unity3D",
-    "\\Unity3D\\FoxAdventrue",
-    "\\Unity3D\\FoxAdventrue\\Basic",
-    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue",
-    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets",
-    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\Scripts",
-    "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\Scripts\\GUI"
+    "\\Unity3D"
   ],
-  "SelectedNode": "\\Unity3D\\FoxAdventrue\\Basic\\FoxAdventrue\\Assets\\Scripts\\GUI\\GUIIventory.cs",
   "PreviewInSolutionExplorer": false
 }

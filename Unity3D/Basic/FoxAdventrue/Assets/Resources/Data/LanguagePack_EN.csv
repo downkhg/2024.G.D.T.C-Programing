@@ -1,0 +1,15 @@
+id,Secene,Type,UI,Text,Image,Color
+1,Title,Image,BackGround,,back,white
+2,Title,Text,MainText,Fox Adventrue,,black
+3,Title,Button,Start,Start,,black
+4,Title,Button,Exit,Exit,,black
+5,GameOver,Image,BackGround,,back,red
+6,GameOver,Text,MainTextShadow,GAME OVER,,black
+7,GameOver,Text,MainTextText,GAME OVER,,red
+8,GameOver,Button,Retry,Retry,,black
+9,GameOver,Button,Exit,Exit,,black
+10,TheEnd,Image,BackGround,,back,
+11,TheEnd,Text,MainTextShadow,The End,,black
+12,TheEnd,Text,MainTextText,The End,,white
+13,TheEnd,Button,ToTitle,ToTitle,,black
+14,TheEnd,Button,Exit,Exit,,black
