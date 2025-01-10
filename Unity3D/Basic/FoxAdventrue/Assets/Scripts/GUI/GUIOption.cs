@@ -41,7 +41,7 @@ public class GUIOption : MonoBehaviour
 
     private void Awake()
     {
-       
+        InitLanguageOption();
     }
 
     // Start is called before the first frame update

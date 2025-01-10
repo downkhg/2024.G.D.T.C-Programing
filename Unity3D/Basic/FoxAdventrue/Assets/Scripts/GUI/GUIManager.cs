@@ -17,7 +17,23 @@ public class GUIManager : MonoBehaviour
 
     private void Awake()
     {
-        
+        SetMatchRat();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SetMatchRat();
+        }
+    }
+
+    public void SetMatchRat()
+    {
+        float matchRat = (float)Screen.height / (float)Screen.width;
+        CanvasScaler canvasScaler = GetComponent<CanvasScaler>();
+        canvasScaler.matchWidthOrHeight = matchRat;
+        Debug.Log($"SetMatchRat({Screen.width}x{Screen.height}):{matchRat}");
     }
 
     public void UpdatePlayerStatusBar(Player player)
