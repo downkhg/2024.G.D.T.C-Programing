@@ -85,8 +85,10 @@ SNode* FindNodeData(SNode* pStart, int data)
 
 	while (pNode)
 	{
-		if (pNode->nData != data)//20 == 40 -> F
+		if (pNode->nData != data)
 			pNode = pNode->pNext;
+		else
+			break;
 	}
 	
 	return pNode;
