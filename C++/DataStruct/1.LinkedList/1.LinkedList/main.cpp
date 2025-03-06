@@ -40,7 +40,7 @@ void main()
 	SNode* pEnd = NULL;
 
 	//노드 추가 테스트
-	pEnd =  CreateNode(pEnd, 10);
+	pEnd = CreateNode(pEnd, 10);
 	pBegin = pEnd; //마지막 노드를 알아야 검색이 가능하므로 저장해둔다.
 
 	pEnd = CreateNode(pEnd, 20);
@@ -55,7 +55,10 @@ void main()
 	if (pFind != NULL)
 		printf("Find:%d\n", pFind->nData);
 
-	pEnd = InsertNodeData(pBegin, 30, 60);//노드 삽입
+	SNode* pInsert = InsertNodeData(pBegin, 30, 60);//노드 삽입
+	if (pInsert != NULL)
+		printf("Insert:%d\n", pInsert->nData);
+	//pEnd = pInsert; //현재 인터페이스 대로라면 50뒤에 값을 삽입했다면, 이런식으로 사용자가 어디에 추가 했느냐에 따라 end를 수동으로 변경하는것이 일반적.
 
 	PrintLinkedList(pBegin);
 
@@ -73,7 +76,7 @@ SNode* CreateNode(SNode* pNode, int data)
 	SNode* pTemp = new SNode(); //(SNode*)malloc(sizeof(SNode))
 	pTemp->nData = data;
 	pTemp->pNext = NULL;
-	if(pNode!=NULL)//0x02 != NULL -> T 
+	if (pNode != NULL)//NULL == NULL -> !T -> F
 		pNode->pNext = pTemp;
 	//pTemp->pNext = pNode;
 	return  pTemp;
@@ -90,7 +93,7 @@ SNode* FindNodeData(SNode* pStart, int data)
 		else
 			break;
 	}
-	
+
 	return pNode;
 }
 
@@ -101,12 +104,16 @@ SNode* InsertNodeData(SNode* pStart, int data, int insert)
 
 	pNode = FindNodeData(pStart, data);
 
-	pInsert = new SNode();
-	//0x06->pNext = 0x04 
-	pInsert->pNext = pNode->pNext;
-	pNode->pNext = pInsert;
+	if (pNode)
+	{
+		pInsert = new SNode();
+		//0x06->pNext = 0x04 
+		pInsert->pNext = pNode->pNext;
+		pNode->pNext = pInsert;
+		pInsert->nData = insert;
+	}
 
-	return pNode;
+	return pInsert;
 }
 
 void DeleteNodeData(SNode* pStart, int del)
@@ -114,7 +121,22 @@ void DeleteNodeData(SNode* pStart, int del)
 	SNode* pPre = NULL;
 	SNode* pNode = pStart;
 
-
+	while (pNode)
+	{
+		if (pNode->nData != del)//10!=60 => T //20!=60 => T //30!=60 => T//60 != ->F
+		{
+			//pNode값이 변경되기전에 이전으로 지정한다.
+			pPre = pNode;
+			pNode = pNode->pNext;
+		}
+		else
+		{
+			//0x03->pNext = 0x04
+			pPre->pNext = pNode->pNext;
+			delete pNode;
+			break;
+		}
+	}
 }
 
 void PrintLinkedList(SNode* pStart)
