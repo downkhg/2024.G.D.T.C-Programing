@@ -101,6 +101,11 @@ SNode* InsertNodeData(SNode* pStart, int data, int insert)
 
 	pNode = FindNodeData(pStart, data);
 
+	pInsert = new SNode();
+	//0x06->pNext = 0x04 
+	pInsert->pNext = pNode->pNext;
+	pNode->pNext = pInsert;
+
 	return pNode;
 }
 
