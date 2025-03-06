@@ -25,21 +25,52 @@ void VectorMain()
 {
 	vector<int> container(1);//컨테이너생성시 크기를 지정가능하다.
 	container[0] = 10;
-	cout << "Print:";
+	cout << "Print(" << container.capacity() << "):";
 	for (int i = 0; i < container.size(); i++)
 		cout << "[" << i << "]" << container[i] << ",";
 	cout << endl;
 	container.resize(3); //배열의 크기를 지정한다.
-	cout << "Print:";
+	cout << "Print(" << container.capacity() << "):";
 	for (int i = 0; i < container.size(); i++)
 		cout << "[" << i << "]" << container[i] << ",";
 	cout << endl;
-	//1.추가 2.삽입 3.삭제 4.모두삭제
 	vector<int>::iterator it;
-	cout << "PrintPtr:";
+	cout << "PrintPtr(" << container.capacity() << "):";
 	for (it = container.begin(); it != container.end(); it++)
 		cout << "[" << &*it << "]" << *it << ",";
 	cout << endl;
+	//1.추가
+	container.push_back(100);
+	cout << "PrintPtr(" << container.capacity() << "):";
+	for (vector<int>::iterator it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	//2.삽입 
+	it = container.begin(); //10
+	cout << "it[" << &*it << "]" << *it << endl;
+	it++;
+	cout << "it[" << &*it << "]" << *it << endl;
+	it++;
+	cout << "it[" << &*it << "]" << *it << endl;
+	//찾기
+	vector<int>::iterator itFind = find(container.begin(), container.end(), 100);
+	cout << "itFind[" << &*itFind << "]" << *itFind << endl;
+	container.insert(itFind, 50);
+
+	cout << "PrintPtr(" << container.capacity() << "):";
+	for (vector<int>::iterator it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	//3.삭제
+	it = --container.end();
+	it = container.begin() + 3;
+	cout << "it[" << &*it << "]" << *it << endl;
+	container.erase(it);
+	cout << "PrintPtr(" << container.capacity() << "):";
+	for (vector<int>::iterator it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	// 4.모두삭제
 	container.clear(); //모두삭제
 	cout << "Clear:";
 	for (it = container.begin(); it != container.end(); it++)
@@ -52,12 +83,117 @@ void VectorMain()
 //3.연결리스트의 종류: 단일, 환형, 이중 stl의 리스트는 어디에 해당되는가?
 void ListMain()
 {
+	list<int> container(1);//컨테이너생성시 크기를 지정가능하다.
+	list<int>::iterator it;
+	//container[0] = 10;
+	cout << "PrintPtr:";
+	for (it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	cout << "PrintPtr:";
+	for (it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	container.resize(3);
+	cout << "PrintPtr:";
+	for (it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	//1.추가
+	container.push_back(100);
+	cout << "PrintPtr:";
+	for (list<int>::iterator it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	//2.삽입 
+	it = container.begin(); //10
+	cout << "it[" << &*it << "]" << *it << endl;
+	it++;
+	cout << "it[" << &*it << "]" << *it << endl;
+	it++;
+	cout << "it[" << &*it << "]" << *it << endl;
+	//찾기
+	list<int>::iterator itFind = find(container.begin(), container.end(), 100);
+	cout << "itFind[" << &*itFind << "]" << *itFind << endl;
+	container.insert(itFind, 50);
 
+	cout << "PrintPtr:";
+	for (list<int>::iterator it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	//3.삭제
+	it = --container.end();
+	it = container.begin()++;
+	cout << "it[" << &*it << "]" << *it << endl;
+	container.erase(it);
+	cout << "PrintPtr:";
+	for (list<int>::iterator it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	// 4.모두삭제
+	container.clear(); //모두삭제
+	cout << "Clear:";
+	for (it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
 }
 //데크: 앞뒤로 자료를 추가/삭제가능, 랜덤접근가능.
 void DequeMain()
 {
+	deque<int> container(1);//컨테이너생성시 크기를 지정가능하다.
+	container[0] = 10;
+	cout << "Print:";
+	for (int i = 0; i < container.size(); i++)
+		cout << "[" << i << "]" << container[i] << ",";
+	cout << endl;
+	container.resize(3); //배열의 크기를 지정한다.
+	cout << "Print:";
+	for (int i = 0; i < container.size(); i++)
+		cout << "[" << i << "]" << container[i] << ",";
+	cout << endl;
+	deque<int>::iterator it;
+	cout << "PrintPtr:";
+	for (it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	//1.추가
+	container.push_back(100);
+	container.push_front(5);
+	cout << "PrintPtr:";
+	for (deque<int>::iterator it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	//2.삽입 
+	it = container.begin(); //10
+	cout << "it[" << &*it << "]" << *it << endl;
+	it++;
+	cout << "it[" << &*it << "]" << *it << endl;
+	it++;
+	cout << "it[" << &*it << "]" << *it << endl;
+	//찾기
+	deque<int>::iterator itFind = find(container.begin(), container.end(), 100);
+	cout << "itFind[" << &*itFind << "]" << *itFind << endl;
+	container.insert(itFind, 50);
 
+	cout << "PrintPtr:";
+	for (deque<int>::iterator it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	//3.삭제
+	it = --container.end();
+	it = container.begin() + 3;
+	cout << "it[" << &*it << "]" << *it << endl;
+	container.erase(it);
+	cout << "PrintPtr:";
+	for (deque<int>::iterator it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
+	// 4.모두삭제
+	container.clear(); //모두삭제
+	cout << "Clear:";
+	for (it = container.begin(); it != container.end(); it++)
+		cout << "[" << &*it << "]" << *it << ",";
+	cout << endl;
 }
 //스택: 뒤에서 추가되고 뒤에서 꺼냄.
 //재귀함수에서 이전 함수를 호출할때마다 스택에 쌓임.
@@ -125,9 +261,9 @@ void HashMapMain()
 }
 void main()
 {
-	VectorMain();
+	//VectorMain();
 	//ListMain();
-	//DequeMain();
+	DequeMain();
 	//StackMain();
 	//QueueMain();
 	//PriorytyQueueMain();
