@@ -163,7 +163,7 @@ void DeleteLinkedList(SNode* pStart)
 	{
 		pDel = pNode;
 		pNode = pNode->pNext;
-		delete(pNode);
+		delete(pDel);
 	}
 }
 
