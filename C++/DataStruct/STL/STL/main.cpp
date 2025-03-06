@@ -200,20 +200,62 @@ void DequeMain()
 //문자열뒤집기 -> 문자배열 -> apple -> elppa
 void StackMain()
 {
+	char apple[] = "apple";
+	stack<char> stack;
+	cout << apple << endl;
+	int idx = 0;
+	while (apple[idx] != '\0')
+	{
+		stack.push(apple[idx]);
+		cout << idx << ":" << apple[idx] << endl;
+		idx++;
+	}
 
+	idx = 0;
+	while (!stack.empty())
+	{
+		char top = stack.top();
+		cout << idx << ":" << top << endl;
+		apple[idx] = top;
+		stack.pop();
+		idx++;
+	}
+
+	cout << apple << endl;
 }
 //큐: 뒤에서 추가하고 앞에서 꺼냄.
 //메세지큐: 이벤트가 발생한 순서대로 저장하는 공간.
 //입력된 순서대로 명령어 처리하기
 void QueueMain()
 {
+	queue<char> msgQueue;
+	char cInput;
+	do {
+		cin >> cInput;
+		msgQueue.push(cInput);
+	} while (cInput != 'x');
 
+	while (!msgQueue.empty())
+	{
+		cout << msgQueue.front() << endl;
+		msgQueue.pop();
+	}
 }
 //우선순위큐: 우선순위가 높은 원소가 먼저나감(힙)
 //무작위로 데이터를 넣었을때 어떤 순서대로 데이터가 나오는가? 큰값부터 나온다.
 void PriorytyQueueMain()
 {
+	priority_queue<int> que;
+	que.push(10);
+	que.push(40);
+	que.push(20);
+	que.push(30);
 
+	while (!que.empty())
+	{
+		cout << que.top() << endl;
+		que.pop();
+	}
 }
 //맵: 사전식으로 데이터를 찾을수있다.
 //해당영어단어를 넣으면 한국어 결과가 나온다.
@@ -263,10 +305,10 @@ void main()
 {
 	//VectorMain();
 	//ListMain();
-	DequeMain();
+	//DequeMain();
 	//StackMain();
 	//QueueMain();
-	//PriorytyQueueMain();
+	PriorytyQueueMain();
 	//MapMain();
 	//SetMain();
 }
