@@ -6,11 +6,14 @@
 버전 : 1.01
 ###################################*/
 #include <stdio.h>
+#include <stdint.h>
 
 using namespace std;
 
 struct SNode {
+	//__int64 nData; //x64에서 최대크기로 사용할때
 	int nData;
+	//short int nData; //최대 메모리의 크기보다 작아, 최대 메모리의 크기보다 적게사용하여 패딩(사이공간)이 발생한다.
 	SNode* pLeft;
 	SNode* pRight;
 };
@@ -55,8 +58,10 @@ void Print(SNode* pSeed)
 
 void main()
 {
-	SNode* pSeed = NULL;
 
+	printf("SNodeSize:%d\n", sizeof(SNode));
+	SNode* pSeed = NULL;
+	
 	SNode* pParent = CreateNode(10);
 	SNode* pLeft = CreateNode(20);
 	SNode* pRight = CreateNode(30);
@@ -70,6 +75,7 @@ void main()
 	MakeRight(pLeft, pE);
 
 	pSeed = pParent;
-
+	printf("SNodeS.pData:%d\n", sizeof(pSeed->nData));
+	printf("SNodeS.pLeftSize:%d\n", sizeof(pSeed->pLeft));
 	Print(pSeed);
 }

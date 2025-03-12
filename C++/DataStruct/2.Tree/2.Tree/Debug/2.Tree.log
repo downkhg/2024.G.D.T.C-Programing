@@ -1,0 +1,9 @@
+﻿  main.cpp
+C:\Users\Administrator\Source\Repos\2024.G.D.T.C-Programing\C++\DataStruct\2.Tree\2.Tree\main.cpp(45,9): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 '__int64'입니다.
+      C:\Users\Administrator\Source\Repos\2024.G.D.T.C-Programing\C++\DataStruct\2.Tree\2.Tree\main.cpp(45,9):
+      서식 문자열에서 '%lld'을(를) 사용하는 것이 좋습니다.
+      C:\Users\Administrator\Source\Repos\2024.G.D.T.C-Programing\C++\DataStruct\2.Tree\2.Tree\main.cpp(45,9):
+      서식 문자열에서 '%I64d'을(를) 사용하는 것이 좋습니다.
+  
+C:\Users\Administrator\Source\Repos\2024.G.D.T.C-Programing\C++\DataStruct\2.Tree\2.Tree\main.cpp(58,1): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+  2.Tree.vcxproj -> C:\Users\Administrator\Source\Repos\2024.G.D.T.C-Programing\C++\DataStruct\2.Tree\Debug\2.Tree.exe
