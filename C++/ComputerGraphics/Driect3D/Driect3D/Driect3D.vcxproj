@@ -142,6 +142,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="tiger.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tiger.x" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
