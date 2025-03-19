@@ -579,7 +579,7 @@ void Render()
     // Update matrix variables and lighting variables
     //
     ConstantBuffer cb1;
-	cb1.mWorld = XMMatrixTranspose( g_World );
+    cb1.mWorld = XMMatrixIdentity();// XMMatrixTranspose(g_World);
 	cb1.mView = XMMatrixTranspose( g_View );
 	cb1.mProjection = XMMatrixTranspose( g_Projection );
 	cb1.vLightDir[0] = vLightDirs[0];
@@ -603,7 +603,7 @@ void Render()
     //
     for( int m = 0; m < 2; m++ )
     {
-		XMMATRIX mLight = XMMatrixTranslationFromVector( 5.0f * XMLoadFloat4( &vLightDirs[m] ) );
+		XMMATRIX mLight = XMMatrixTranslationFromVector( 3.0f * XMLoadFloat4( &vLightDirs[m] ) );
 		XMMATRIX mLightScale = XMMatrixScaling( 0.2f, 0.2f, 0.2f );
         mLight = mLightScale * mLight;
 
